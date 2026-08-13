@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Link Undangan</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body{background:var(--maroon-deep);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px 16px}
+  .gen-box{
+    background:var(--cream);max-width:460px;width:100%;border-radius:14px;padding:36px 30px;
+    border:1px solid var(--gold);box-shadow:var(--shadow);
+  }
+  .gen-box h1{font-size:26px;color:var(--maroon-deep);text-align:center;margin-bottom:6px}
+  .gen-box p.sub{text-align:center;color:#7a5b48;font-size:16px;margin-bottom:26px}
+  .gen-box input{
+    width:100%;padding:13px 14px;border:1px solid #d9c8a8;border-radius:6px;
+    font-family:'Cormorant Garamond',serif;font-size:17px;margin-bottom:14px;background:#fff;
+  }
+  .gen-box button{
+    width:100%;background:var(--maroon);color:#fff;border:none;padding:13px;border-radius:6px;
+    font-family:'Playfair Display',serif;letter-spacing:1px;font-size:15px;cursor:pointer;margin-bottom:10px;
+  }
+  .gen-box button:hover{background:var(--maroon-deep)}
+  .result{
+    margin-top:18px;background:#fff;border:1px dashed var(--gold);border-radius:8px;padding:16px;
+    display:none;word-break:break-all;font-size:15px;color:var(--ink);
+  }
+  .result.show{display:block}
+  .result .actions{display:flex;gap:8px;margin-top:12px}
+  .result .actions button{margin-bottom:0;font-size:14px;padding:10px}
+  .btn-wa{background:#2f8f4e !important}
+  .btn-wa:hover{background:#256e3b !important}
+  .note{font-size:13px;color:#9c7d5f;text-align:center;margin-top:22px;line-height:1.6}
+</style>
+</head>
+<body>
+  <div class="gen-box">
+    <h1>Generator Link Undangan</h1>
+    <p class="sub">Buat link undangan personal untuk tiap tamu</p>
+
+    <input type="text" id="nama-tamu" placeholder="Nama tamu, mis. Bpk. Yosep Tasi">
+    <button id="btn-generate">Buat Link</button>
+
+    <div class="result" id="result">
+      <div id="link-output"></div>
+      <div class="actions">
+        <button id="btn-copy-link">Salin Link</button>
+        <button id="btn-wa" class="btn-wa">Bagikan via WhatsApp</button>
+      </div>
+    </div>
+
+    <p class="note">Tulis nama tamu, lalu klik "Buat Link". Link undangan personal beserta nama tamu akan otomatis dibuat dari alamat website undangan Anda.</p>
+  </div>
+
+<script>
+const BASE_URL = 'https://websitesaya.github.io/Undangan_Agus-Wenny/';
+
+document.getElementById('btn-generate').addEventListener('click', () => {
+  const nama = document.getElementById('nama-tamu').value.trim();
+  if(!nama){ alert('Mohon isi nama tamu.'); return; }
+
+  const sep = BASE_URL.includes('?') ? '&' : '?';
+  const link = `${BASE_URL}${sep}to=${encodeURIComponent(nama)}`;
+
+  document.getElementById('link-output').textContent = link;
+  document.getElementById('result').classList.add('show');
+
+  document.getElementById('btn-copy-link').onclick = () => {
+    navigator.clipboard.writeText(link);
+    document.getElementById('btn-copy-link').textContent = 'Tersalin!';
+    setTimeout(()=>document.getElementById('btn-copy-link').textContent='Salin Link',1500);
+  };
+
+  document.getElementById('btn-wa').onclick = () => {
+    const teks = `Yth. Bapak/Ibu/Saudara/i *${nama}*%0A%0ATanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di acara pernikahan kami.%0A%0ABerikut link undangan kami:%0A${encodeURIComponent(link)}%0A%0ATerima kasih atas doa dan restunya 🙏`;
+    window.open(`https://wa.me/?text=${teks}`, '_blank');
+  };
+});
+</script>
+</body>
+</html>
