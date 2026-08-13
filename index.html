@@ -11,9 +11,6 @@
 <!-- ===================== SNOW OVERLAY ===================== -->
 <div id="snow-container" aria-hidden="true"></div>
 
-<!-- ===================== BUTTERFLY OVERLAY ===================== -->
-<div id="butterfly-container" aria-hidden="true"></div>
-
 <!-- ===================== OPENING SCREEN ===================== -->
 <div id="opening-screen">
   <div class="opening-bg"></div>
@@ -149,14 +146,6 @@
     </div>
   </section>
 
-  <!-- LIGHTBOX -->
-  <div id="lightbox">
-    <span class="close" id="lb-close">&times;</span>
-    <span class="nav prev" id="lb-prev">&#10094;</span>
-    <img id="lb-img" src="" alt="">
-    <span class="nav next" id="lb-next">&#10095;</span>
-  </div>
-
   <!-- HADIAH -->
   <section id="hadiah">
     <div class="container">
@@ -241,10 +230,19 @@
     </div>
   </footer>
 
-  <div id="music-toggle">&#9835;</div>
   <audio id="bg-music" src="Guy Sebastian - Angels Brought Me Here Official Video.mp3" loop preload="none"></audio>
 
 </div>
+
+<!-- LIGHTBOX (di luar #invitation supaya position:fixed berjalan normal terhadap layar) -->
+<div id="lightbox">
+  <span class="close" id="lb-close">&times;</span>
+  <span class="nav prev" id="lb-prev">&#10094;</span>
+  <img id="lb-img" src="" alt="">
+  <span class="nav next" id="lb-next">&#10095;</span>
+</div>
+
+<div id="music-toggle">&#9835;</div>
 
 <script src="script.js"></script>
 </body>
